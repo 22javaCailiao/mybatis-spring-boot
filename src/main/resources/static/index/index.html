@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html ng-app="userApp" ng-controller="userController">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/button.css" />
+<link rel="stylesheet" href="../css/toastr.css" />
+<link rel="stylesheet" href="../css/ng-table.min.css" />
+<link rel="stylesheet" href="index.css" />
+<title>User Manager</title>
+</head>
+<body>
+	<div style="padding: 10px 100px 10px; align: center;">
+		<div>
+			<h4>添加新用户</h4>
+			<div class="input-group" id="addRows" >
+				<button class="btn btn-default btn-success" 
+					ng-click="openAddUserModel()">添加新用户</button>
+				<button class="btn btn-default btn-primary" 
+					ng-click="queryUsers()">查询所有用户</button>
+			</div>
+		</div>
+		<!-- 显示所有查询结果 -->
+		<p>
+			<strong>Page:</strong> {{userTable.page()}}
+		</p>
+		<p>
+			<strong>Count per page:</strong> {{userTable.count()}}
+		</p>
+		<div class="row">
+		 	<div class="col-md-12">
+		 		<table ng-table="userTable" class="table table-condensed table-bordered table-striped">
+						<tr ng-repeat="user in $data">
+							<td data-title="'编号'" >{{$index+1}}</td>
+							<td data-title="'用户名'" filter="username: 'text'}" sortable="'username'">
+								<a ng-click="openUserDetailModel(user)">{{user.username}}</a>
+							</td>
+							<td data-title="'性别'" filter="{sex: 'text'}" sortable="'sex'">{{user.sex}}</td>
+							<td data-title="'年龄'" filter="{age: 'text'}" sortable="'age'">{{user.age}}</td>
+							<td data-title="'学校'" filter="{school: 'text'}" sortable="'school'">{{user.school}}</td>
+							<td data-title="'专业'" filter="{major: 'text'}" sortable="'major'">{{user.major}}</td>
+							<td data-title="'地址'" filter="{address: 'text'}" sortable="'address'">{{user.address}}</td>
+							<td data-title="'操作'" >
+								<button type="button" ng-click="openDeleteModel(user)" class="btn btn-default btn-delete">
+									<span class="glyphicon glyphicon-trash"></span> 删除
+								</button>
+								<button type="button" ng-click="openUpdateModel(user)" class="btn btn-default btn-update">
+									<span class="glyphicon glyphicon-pencil"></span> 编辑
+								</button>
+							</td>
+						</tr>
+				</table>
+		 	</div>
+		</div>
+		<toaster-container></toaster-container>
+		<!-- 模态框 -->
+		<script type="text/ng-template" id="addUserInfo.html"> 
+			<div>
+	<div class="modal-header">
+		<h3 class="modal-title" align="center">
+			编辑用户信息
+		</h3>
+	</div>
+	<div class="modal-body">
+		<div align="center">
+			<div>
+				<div class="input-group" id="addRows">
+					<span class="input-group-addon" id="information">
+						username:
+					</span>
+					<input ng-model="user.username" class="form-control" placeholder="UserName"
+					/>
+				</div>
+				<div class="input-group" id="addRows">
+					<span class="input-group-addon" id="information">
+						sex:
+					</span>
+					<select ng-model="user.sex" class="selectpicker show-tick form-control">
+						<option ng-repeat="sex in sexs" value="{{sex.value}}">
+							{{sex.display}}
+						</option>
+					</select>
+				</div>
+				<div class="input-group" id="addRows">
+					<span class="input-group-addon" id="information">
+						age:
+					</span>
+					<input ng-model="user.age" type="number" class="form-control" placeholder="Age"
+					/>
+				</div>
+				<div class="input-group" id="addRows">
+					<span class="input-group-addon" id="information">
+						school:
+					</span>
+					<select ng-model="user.school" class="selectpicker show-tick form-control">
+						<option ng-repeat="school in schools" value="{{school.value}}">
+							{{school.display}}
+						</option>
+					</select>
+				</div>
+				<div class="input-group" id="addRows">
+					<span class="input-group-addon" id="information">
+						major:
+					</span>
+					<select ng-model="user.major" class="selectpicker show-tick form-control">
+						<option ng-repeat="major in majors" value="{{major.value}}">
+							{{major.display}}
+						</option>
+					</select>
+				</div>
+				<div class="input-group" id="addRows">
+					<span class="input-group-addon" id="information">
+						address:
+					</span>
+					<input ng-model="user.address" class="form-control" placeholder="Address"
+					/>
+				</div>
+				<div class="input-group" id="addRows">
+					<span class="input-group-addon" id="information">
+						birthday:
+					</span>
+					<input ng-model="user.birthday" type="date" class="form-control" placeholder="Birthday"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()">
+			确认
+		</button>
+		<button class="btn btn-warning" ng-click="cancel()">
+			退出
+		</button>
+	</div>
+</div>
+		</script>
+		
+		
+		<script type="text/ng-template" id="editUserInfo.html"> 
+			<div>
+			<div class="modal-header">
+				<h3 class="modal-title" align="center">编辑用户信息</h3>
+			</div>
+
+			<div class="modal-body">
+				<div align="center">
+					<div>
+						<!-- 用于添加用户的文本框 -->
+			<div class="input-group" id="updateRows">
+				<span class="input-group-addon" id="information">username:</span> 
+				<input ng-model="user.username" class="form-control" style="width:100%" placeholder="UserName" />
+			</div>
+			<div class="input-group" id="updateRows">
+				<span class="input-group-addon" id="information">sex:</span> 
+				<select ng-model="user.sex" style="width:100%"  class="selectpicker show-tick form-control">
+					<option ng-repeat="sex in sexs" value="{{sex.value}}">{{sex.display}}</option>
+				</select>
+			</div>
+			<div class="input-group" id="updateRows">
+				<span class="input-group-addon" id="information" >age:</span> 
+				<input ng-model="user.age" class="form-control" placeholder="Age" />
+			</div>
+			<div class="input-group" id="updateRows">
+				<span class="input-group-addon" id="information" >school:</span> 
+				<select ng-model="user.school" class="selectpicker show-tick form-control">
+					<option ng-repeat="school in schools" value="{{school.value}}">{{school.display}}</option>
+				</select>
+			</div>
+			<div class="input-group" id="updateRows">
+				<span class="input-group-addon" id="information">major:</span> 
+				<select ng-model="user.major" class="selectpicker show-tick form-control">
+					<option ng-repeat="major in majors" value="{{major.value}}">{{major.display}}</option>
+				</select>
+			</div>
+			<div class="input-group" id="updateRows">
+				<span class="input-group-addon" id="information">address:</span> 
+				<input ng-model="user.address" class="form-control" placeholder="Address" />
+			</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button class="btn btn-primary" ng-click="ok()">确认</button>
+				<button class="btn btn-warning" ng-click="cancel()">退出</button>
+			</div>
+		</div>
+		</script>
+		<!-- 模态框 -->
+		<script type="text/ng-template" id="userDetail.html"> 
+			<div width="30%">
+			<div class="modal-header">
+				<h3 class="modal-title" align="center">查看用户信息</h3>
+			</div>
+
+			<div class="modal-body">
+				<div align="center">
+					<table>
+						<tr>
+							<td>用户名：</td>
+							<td>{{user.username}}</td>
+						</tr>
+						<tr>
+							<td>性别：</td>
+							<td>{{user.sex}}</td>
+						</tr>
+						<tr>
+							<td>年龄：</td>
+							<td>{{user.age}}</td>
+						</tr>
+						<tr>
+							<td>学校：</td>
+							<td>{{user.school}}</td>
+						</tr>
+						<tr>
+							<td>专业：</td>
+							<td>{{user.major}}</td>
+						</tr>
+						<tr>
+							<td>地址：</td>
+							<td>{{user.address}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button class="btn btn-primary" ng-click="ok()">确认</button>
+				<button class="btn btn-warning" ng-click="cancel()">退出</button>
+			</div>
+		</div>
+		</script>
+		
+			<script type="text/ng-template" id="deleteUser.html"> 
+			<div width="30%">
+			<div class="modal-header">
+				<h4 class="modal-title" align="center">确认删除该用户</h4>
+			</div>
+
+			<div class="modal-body">
+				<div align="center">
+					<span>确认要删除用户 <sapn style="color:red">{{user.username}}</span> 吗</span>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button class="btn btn-primary" ng-click="ok()">确认</button>
+				<button class="btn btn-warning" ng-click="cancel()">退出</button>
+			</div>
+		</div>
+		</script>
+		<script type="text/javascript" src="../js/angular.min.js"></script>
+		<!-- <script src="//cdn.bootcss.com/ng-table/1.0.0/ng-table.min.js"></script> -->
+		<script type="text/javascript" src="../js/ng-table.min.js"></script>
+		<script
+			src="http://cdn.bootcss.com/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.js"></script> 
+		<script src="../js/toastr.js"></script>
+		<script src="index.js"></script>
+	</div>
+</body>
+</html>

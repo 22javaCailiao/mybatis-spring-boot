@@ -1,0 +1,12 @@
+#information {
+	width: 100px !important;
+}
+.input-group-btn .information {
+	width: 100px;
+}
+#addRows{
+	width:53%;
+}
+#updateRows{
+	width:53%;
+}

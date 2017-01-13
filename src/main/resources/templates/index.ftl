@@ -1,8 +1,7 @@
 <html>
 <head>
     <title>Mybatis分页插件 - 测试页面</title>
-    <script src="${request.contextPath}/static/js/jquery-1.11.1.min.js"></script>
-    <link href="${request.contextPath}/static/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="//cdn.bootcss.com/jquery/1.11.1/jquery.js"></script>
     <style type="text/css">
         .pageDetail {
             display: none;
@@ -10,6 +9,71 @@
 
         .show {
             display: table-row;
+        }
+
+        * {
+            margin: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .wrapper {
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            margin: 0 auto -155px;
+        }
+
+        .footer, .push {
+            height: 155px;
+        }
+
+        table.gridtable {
+            font-family: verdana, arial, sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+            margin: 5px auto;
+        }
+
+        table.gridtable th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;
+        }
+
+        table.gridtable td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+        }
+
+        .middle {
+            text-align: center;
+            margin: 0 auto;
+            width: 800px;
+            height: auto;
+        }
+
+        .info {
+            font-size: 12px;
+            text-align: center;
+            line-height: 20px;
+            padding: 40px;
+        }
+
+        .info a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: green;
         }
     </style>
     <script>
