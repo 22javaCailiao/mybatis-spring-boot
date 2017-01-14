@@ -24,7 +24,10 @@
 
 package com.reapal.demos.conf;
 
+import com.reapal.demos.interceptor.AuthorityInterceptor;
+import com.reapal.demos.interceptor.CommonInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -39,4 +42,21 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
+
+    /**
+     * 配置拦截器
+     * @author lance
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new CommonInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/static/**");
+        registry.addInterceptor(new AuthorityInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/static/**","/login","/register");
+        super.addInterceptors(registry);
+    }
+
 }
