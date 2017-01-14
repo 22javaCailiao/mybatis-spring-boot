@@ -17,7 +17,7 @@ import java.util.Date;
  */
 public class BaseController {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    public Logger logger = LoggerFactory.getLogger(getClass());
 
     protected HttpServletRequest request;
     protected HttpServletResponse response;

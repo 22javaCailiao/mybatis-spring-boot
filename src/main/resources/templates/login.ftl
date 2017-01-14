@@ -8,11 +8,11 @@
 
     <title>INSPINIA | Login 2</title>
 
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="${base}/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/static/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <link href="../static/css/animate.css" rel="stylesheet">
-    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="${base}/static/css/animate.css" rel="stylesheet">
+    <link href="${base}/static/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -22,7 +22,7 @@
         <div class="row">
 
             <div class="col-md-6">
-                <h2 class="font-bold">Welcome to IN+</h2>
+                <h2 class="font-bold">Welcome to Reapal</h2>
 
                 <p>
                     Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
@@ -59,7 +59,7 @@
                         <p class="text-muted text-center">
                             <small>Do not have an account?</small>
                         </p>
-                        <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+                        <a class="btn btn-sm btn-white btn-block" href="register">Create an account</a>
                     </form>
                     <p class="m-t">
                         <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>

@@ -34,20 +34,60 @@ public class LoginController extends BaseController{
         return mv;
     }
 
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public ModelAndView index() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("index");
+        return mv;
+    }
+
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ModelAndView signIn(User user, RedirectAttributes redirectAttributes) {
         ModelAndView mv = new ModelAndView();
-        userService.deleteById(1l);
-        User user1 = userService.queryById(2l);
-        userService.update(user1);
         List<User> users = userService.queryListByWhere(user);
         if(users.size() == 1){
-            mv.addObject("message", "login success");
-            mv.setViewName("index");
+            users.get(0).setPassword(null);
+            session.setAttribute("user",users.get(0));
+            redirectAttributes.addFlashAttribute("message", "welcome to reapal");
+            mv.setViewName("redirect:/index");
         }else{
             redirectAttributes.addFlashAttribute("message", "login error");
             mv.setViewName("redirect:/login");
         }
+        return mv;
+    }
+
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    public ModelAndView register(User user, RedirectAttributes redirectAttributes) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("register");
+        return mv;
+    }
+
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public ModelAndView signup(User user, RedirectAttributes redirectAttributes) {
+        ModelAndView mv = new ModelAndView();
+        User u = new User();
+        u.setUsername(user.getUsername());
+        List<User> users = userService.queryListByWhere(u);
+        if(users.size() == 0){
+            userService.save(user);
+            mv.addObject("message", "register success");
+            mv.setViewName("login");
+        }else{
+            redirectAttributes.addFlashAttribute("message", "username has been used ");
+            mv.setViewName("redirect:/register");
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/signout",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView signout() {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("message", "signout repal.com");
+        mv.setViewName("redirect:/login");
+        logger.info("===============退出系统=================");
+        session.invalidate();
         return mv;
     }
 

@@ -103,6 +103,7 @@ public abstract class BaseService<T extends BaseEntity> {
      * @return
      */
     public Integer update(T record) {
+        record.setUpdated(new Date());
         return mapper.updateByPrimaryKey(record);
     }
 

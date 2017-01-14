@@ -9,17 +9,17 @@
 
     <title>INSPINIA | Dashboard</title>
 
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="${base}/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/static/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Toastr style -->
-    <link href="../static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="${base}/static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
     <!-- Gritter -->
-    <link href="../static/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="${base}/static/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
-    <link href="../static/css/animate.css" rel="stylesheet">
-    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="${base}/static/css/animate.css" rel="stylesheet">
+    <link href="${base}/static/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -40,7 +40,7 @@
                                 <li><a href="contacts.html">Contacts</a></li>
                                 <li><a href="mailbox.html">Mailbox</a></li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">Logout</a></li>
+                                <li><a href="${base}/signout">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -132,7 +132,7 @@
                             <li><a href="login.html">Login</a></li>
                             <li><a href="login_two_columns.html">Login v.2</a></li>
                             <li><a href="forgot_password.html">Forget password</a></li>
-                            <li><a href="register.html">Register</a></li>
+                            <li><a href="register.ftl">Register</a></li>
                             <li><a href="404.html">404 Page</a></li>
                             <li><a href="500.html">500 Page</a></li>
                             <li><a href="empty_page.html">Empty page</a></li>
@@ -259,7 +259,7 @@
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
             <form role="search" class="navbar-form-custom" action="search_results.html">
                 <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                    <input type="text" placeholder="Search for something${base}." class="form-control" name="top-search" id="top-search">
                 </div>
             </form>
         </div>
@@ -365,7 +365,7 @@
 
 
                 <li>
-                    <a href="login.html">
+                    <a href="${base}/signout">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>
@@ -1001,7 +1001,7 @@
                                         <img alt="image" class="img-circle message-avatar" src="img/a7.jpg">
                                     </div>
                                     <div class="media-body">
-                                        Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                                        Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet${base}", comes from a line in section 1.10.32.
                                         <br>
                                         <small class="text-muted">Yesterday 2:45 pm</small>
                                     </div>
