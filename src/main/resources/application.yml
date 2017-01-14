@@ -2,10 +2,6 @@ server:
     port: 8080
     context-path:
 
-logging:
-    level:
-        tk.mybatis: TRACE
-
 spring:
     datasource:
         name: test
@@ -47,7 +43,7 @@ mybatis:
 
 mapper:
     mappers:
-        - com.reapal.demos.util.MyMapper
+        - com.reapal.demos.mapper.BaseMapper
     not-empty: false
     identity: MYSQL
 
