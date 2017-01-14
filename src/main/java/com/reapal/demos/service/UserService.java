@@ -22,11 +22,16 @@
  * THE SOFTWARE.
  */
 
-package com.reapal.demos.mapper;
+package com.reapal.demos.service;
 
-import com.reapal.demos.model.Country;
-import com.reapal.demos.util.MyMapper;
+import org.springframework.stereotype.Service;
+import com.reapal.demos.model.User;
 
-public interface CountryMapper extends MyMapper<Country> {
+/**
+ * @author jack-cooper
+ * @since 2016-01-31 21:42
+ */
+@Service
+public class UserService extends BaseService<User> {
 
 }

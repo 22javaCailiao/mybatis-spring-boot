@@ -30,7 +30,7 @@ package com.reapal.demos.model;
  * @author jack-cooper
  * @since 2016-01-31 21:39
  */
-public class UserInfo extends BaseEntity {
+public class User extends BaseEntity {
     private String username;
     private String password;
     private String usertype;

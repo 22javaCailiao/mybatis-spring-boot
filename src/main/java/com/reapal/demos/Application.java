@@ -1,6 +1,6 @@
 package com.reapal.demos;
 
-import com.reapal.demos.util.MyMapper;
+import com.reapal.demos.mapper.BaseMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Controller
 @EnableWebMvc
 @SpringBootApplication
-@MapperScan(basePackages = "com.reapal.demos.mapper", markerInterface = MyMapper.class)
+@MapperScan(basePackages = "com.reapal.demos.mapper", markerInterface = BaseMapper.class)
 public class Application extends WebMvcConfigurerAdapter {
 
     public static void main(String[] args) {
@@ -25,6 +25,6 @@ public class Application extends WebMvcConfigurerAdapter {
 
     @RequestMapping("/")
     String home() {
-        return "redirect:countries";
+        return "redirect:/login";
     }
 }
