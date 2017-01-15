@@ -24,14 +24,11 @@
 
 package com.reapal.demos.mapper;
 
-import com.reapal.demos.model.User;
-import org.apache.ibatis.annotations.Select;
+import com.reapal.demos.model.UserRole;
 
 /**
  * @author jack-cooper
  * @since 2016-01-22 22:17
  */
-public interface UserMapper extends BaseMapper<User> {
-    @Select("select * from user where username = #{username}")
-    public User queryByName(String username);
+public interface UserRoleMapper extends BaseMapper<UserRole> {
 }

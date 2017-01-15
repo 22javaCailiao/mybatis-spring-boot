@@ -24,6 +24,9 @@
 
 package com.reapal.demos.service;
 
+import com.reapal.demos.mapper.BaseMapper;
+import com.reapal.demos.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.reapal.demos.model.User;
 
@@ -33,5 +36,10 @@ import com.reapal.demos.model.User;
  */
 @Service
 public class UserService extends BaseService<User> {
+    @Autowired
+    private UserMapper userMapper;
 
+    public User queryByName(String name){
+        return userMapper.queryByName(name);
+    }
 }

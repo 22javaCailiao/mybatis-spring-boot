@@ -24,7 +24,6 @@
 
 package com.reapal.demos.conf;
 
-import com.reapal.demos.interceptor.AuthorityInterceptor;
 import com.reapal.demos.interceptor.CommonInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -53,9 +52,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new CommonInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/static/**");
-        registry.addInterceptor(new AuthorityInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/static/**","/login","/register");
         super.addInterceptors(registry);
     }
 

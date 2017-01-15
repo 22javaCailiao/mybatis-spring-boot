@@ -22,16 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.reapal.demos.mapper;
+package com.reapal.demos.service;
 
 import com.reapal.demos.model.User;
-import org.apache.ibatis.annotations.Select;
+import com.reapal.demos.model.UserRole;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author jack-cooper
- * @since 2016-01-22 22:17
+ * @since 2016-01-31 21:42
  */
-public interface UserMapper extends BaseMapper<User> {
-    @Select("select * from user where username = #{username}")
-    public User queryByName(String username);
+@Service
+public class UserRoleService extends BaseService<UserRole> {
+
+    public List<UserRole> getRoleByUser(User user){
+        UserRole userRole = new UserRole();
+        userRole.setUserId(user.getId());
+        return queryListByWhere(userRole);
+    }
+
 }

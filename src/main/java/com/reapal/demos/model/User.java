@@ -39,6 +39,23 @@ public class User extends BaseEntity {
     private String email;
     private String tel;
 
+    public User(){
+
+    }
+
+    public User(User user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.usertype = user.getUsertype();
+        this.enabled = user.getEnabled();
+        this.qq = user.getQq();
+        this.email = user.getEmail();
+        this.tel = user.getTel();
+        super.setId(user.getId());
+        super.setCreated(user.getCreated());
+        super.setUpdated(user.getUpdated());
+    }
+
     public String getUsername() {
         return username;
     }
@@ -93,5 +110,18 @@ public class User extends BaseEntity {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", usertype='" + usertype + '\'' +
+                ", enabled=" + enabled +
+                ", qq='" + qq + '\'' +
+                ", email='" + email + '\'' +
+                ", tel='" + tel + '\'' +
+                '}';
     }
 }

@@ -40,7 +40,7 @@
                                 <li><a href="contacts.html">Contacts</a></li>
                                 <li><a href="mailbox.html">Mailbox</a></li>
                                 <li class="divider"></li>
-                                <li><a href="${base}/signout">Logout</a></li>
+                                <li><a href="${base}/logout">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -365,7 +365,7 @@
 
 
                 <li>
-                    <a href="${base}/signout">
+                    <a href="${base}/logout">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>
