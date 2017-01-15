@@ -1,5 +1,6 @@
 package com.reapal.demos.conf;
 
+import com.reapal.demos.interceptor.LoginSuccessHandler;
 import com.reapal.demos.service.MyAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -9,6 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.NullRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 
 /**
  * Created by jack-cooper on 2017/1/15.
@@ -20,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyAuthenticationProvider provider;//自定义验证
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
     }
@@ -52,16 +58,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 ////        指定记住登录信息所使用的数据源
 //        .tokenRepository(tokenRepository());
 
-        http.authorizeRequests()
+        loginSuccessHandler.setDefaultTargetUrl("/index");
+            http
+                .authorizeRequests()
                 .antMatchers("/static/**","/register").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/index")
-                .failureUrl("/login?error").permitAll()
-                .and().logout().logoutSuccessUrl("/").permitAll()
-                .invalidateHttpSession(true)
-                .and().csrf().disable();
+                .and()
+                    .formLogin().loginPage("/login").defaultSuccessUrl("/index")
+                    .successHandler(loginSuccessHandler)
+                    .failureUrl("/login?error").permitAll()
+                .and()
+                    .logout().logoutSuccessUrl("/").permitAll()
+                    .invalidateHttpSession(true)
+                    .deleteCookies()
+                .and()
+                    .csrf().disable();
     }
 
     @Override

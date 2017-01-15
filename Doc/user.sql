@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50628
 File Encoding         : 65001
 
-Date: 2017-01-14 15:55:31
+Date: 2017-01-15 11:14:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
-  `password` varchar(32) DEFAULT NULL COMMENT '密码',
+  `password` varchar(64) DEFAULT NULL COMMENT '密码',
   `usertype` varchar(2) DEFAULT NULL COMMENT '用户类型',
   `enabled` int(2) DEFAULT NULL COMMENT '是否可用',
   `realname` varchar(32) DEFAULT NULL COMMENT '真实姓名',
@@ -32,13 +32,9 @@ CREATE TABLE `user` (
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', 'admin', '2', null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('2', 'test2', 'aaaa', '2', null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('3', 'test3', 'bbbb', '1', null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('4', 'test4', 'cccc', '2', null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('5', 'test5', 'dddd', '1', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('1', 'admin', '$2a$10$rzJ8Ps9dZq5j6MnIpENVXeOjlddEI7ugFBjQpcS2Yrcn4w6Fb9GAm', null, null, null, '1040078821', '1040078821@qq.com', '18910116121', '2017-01-15 10:41:08', '2017-01-15 10:41:08');

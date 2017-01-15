@@ -25,15 +25,15 @@
 package com.reapal.demos.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.reapal.demos.model.User;
+import com.reapal.demos.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import com.reapal.demos.model.User;
-import com.reapal.demos.service.UserService;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ import java.util.List;
  * @author jack-cooper
  * @since 2017-01-13 11:10
  */
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController extends BaseController{
 
@@ -49,9 +49,11 @@ public class UserController extends BaseController{
     private UserService userInfoService;
 
     @RequestMapping
-    public PageInfo<User> getAll(User userInfo) {
+    public ModelAndView getAll(ModelAndView mv,User userInfo) {
         List<User> userInfoList = userInfoService.queryListByWhere(userInfo);
-        return new PageInfo<User>(userInfoList);
+        mv.setViewName("/users");
+        mv.addObject("pageInfo",new PageInfo<User>(userInfoList));
+        return mv;
     }
 
     @RequestMapping(value = "/add")
