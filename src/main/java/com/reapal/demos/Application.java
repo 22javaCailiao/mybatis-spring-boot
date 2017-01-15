@@ -27,6 +27,6 @@ public class Application extends WebMvcConfigurerAdapter {
 
     @RequestMapping("/")
     String home() {
-        return "redirect:/login";
+        return "redirect:/index";
     }
 }
